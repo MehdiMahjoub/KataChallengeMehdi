@@ -4,6 +4,7 @@
   "description": "Cette API est destiné à un exercice pratique CRUD",
   "main": "index.js",
   "scripts": {
+    "start": "node app/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/MehdiMahjoub/KataChallengeMehdi/issues"
   },
-  "homepage": "https://github.com/MehdiMahjoub/KataChallengeMehdi#readme"
+  "homepage": "https://github.com/MehdiMahjoub/KataChallengeMehdi#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
