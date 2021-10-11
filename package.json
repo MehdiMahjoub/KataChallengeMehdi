@@ -1,0 +1,20 @@
+{
+  "name": "KataChallengeMehdi",
+  "version": "1.0.0",
+  "description": "Cette API est destiné à un exercice pratique CRUD",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MehdiMahjoub/KataChallengeMehdi.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MehdiMahjoub/KataChallengeMehdi/issues"
+  },
+  "homepage": "https://github.com/MehdiMahjoub/KataChallengeMehdi#readme"
+}
