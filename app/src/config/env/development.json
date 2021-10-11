@@ -1,0 +1,9 @@
+{
+    "source": "development",
+    "server": {
+        "port": 3333
+    },
+    "db": {
+        "url": "mongodb+srv://dbmehdiuser:dbmehdiuser1920!@dev-mehdi-kata.nddug.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    }
+}

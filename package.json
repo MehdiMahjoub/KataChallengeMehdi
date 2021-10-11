@@ -4,7 +4,7 @@
   "description": "Cette API est destiné à un exercice pratique CRUD",
   "main": "index.js",
   "scripts": {
-    "start": "node app/src/index.js",
+    "start": "nodemon app/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +19,16 @@
   },
   "homepage": "https://github.com/MehdiMahjoub/KataChallengeMehdi#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "mongoose": "^6.0.10",
+    "nconf": "^0.11.3",
+    "path": "^0.12.7",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
   }
 }

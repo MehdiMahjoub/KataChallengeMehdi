@@ -1,0 +1,9 @@
+{
+    "source": "test",
+    "server": {
+        "port": 4000
+    },
+    "db": {
+        "url": ""
+    }
+}
