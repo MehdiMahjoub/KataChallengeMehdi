@@ -10,9 +10,11 @@ const product = require("../controllers/product_controllers");
 // Gestion des routes & REST methode
 router.get('/products/', product.findProducts); // find all products 
 
-router.post('/products/', product.createProduct); // create user
+router.post('/products/', product.createProduct); // create product
 
 router.get('/products/categorys/', product.getAllCategorys); // get all category
+
+router.get('/products/name/:name', product.getProductByName); //find a product by name
 
 router.delete('/products/id/:id', product.removeProductById); // delete a product by id
 

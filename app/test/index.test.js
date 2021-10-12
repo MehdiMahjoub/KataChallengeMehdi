@@ -98,11 +98,21 @@ describe('API', () => {
     });
 
     describe('find a product by name', async () => {
+
+        it('doesn\'t work if user is not found', async () => {
+            await supertest(app)
+                .delete('/products/name/my product not exist')
+                .expect(404);
+        });
+
         it('works', async () => {
             // get product  by name from db 
             await supertest(app)
                 .get('/products/name/my product test')
                 .expect(200)
+                .expect(async ({ body }) => {
+                    assert.deepEqual(_.omit(body, ['id','createdAt', 'updatedAt']), productDoc);
+                });
         })
     })
 

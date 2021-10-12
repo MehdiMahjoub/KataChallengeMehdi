@@ -56,11 +56,11 @@ exports.createProduct = async (req, res, next) => {
 
                 const product = new Product(validBody.value);
                 let resultSave = await db.create(product);
-                
+
                 if (resultSave._id !== undefined) {
 
                     res.send(resultSave);
-                
+
                 } else {
 
                     res.status(500).send({
@@ -81,7 +81,7 @@ exports.createProduct = async (req, res, next) => {
 exports.getAllCategorys = async (req, res, next) => {
 
     try {
-        
+
         const categorys = await db.findCategorys();
         if (categorys && categorys.length > 0) {
 
@@ -92,7 +92,7 @@ exports.getAllCategorys = async (req, res, next) => {
             });
 
             var uniqueCategorys = [...new Set(allCategorys)]; // create a unique array without duplicates value 
-            
+
             res.send(uniqueCategorys);
 
         } else {
@@ -108,6 +108,29 @@ exports.getAllCategorys = async (req, res, next) => {
     } catch (error) {
         console.log(error);
     }
+}
+
+//get product by name
+exports.getProductByName = async (req, res, next) => {
+    try {
+        const name = req.params.name;
+
+        const product = await db.findProducts({name: name});
+
+        if (product) {
+
+            res.send(product)
+
+        } else {
+            res.status(404).send({
+                message: "product not found"
+            });
+        }
+        next()
+    } catch (err) {
+        console.log(err)
+    }
+
 }
 
 //delete a product by id
