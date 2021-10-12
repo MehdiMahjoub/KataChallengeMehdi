@@ -6,13 +6,13 @@ const assert = require('assert').strict;
 const app = require('../src/index');
 const db = require('../src/models');
 
-describe('API', () => {
+describe('API', async () => {
     before(async () => {
         await db.deleteAll();
-    })
+    });
 
     //TODO before
-    describe('get list', () => {
+    describe('get list', async () => {
         let products;
 
         beforeEach(async () => {
@@ -26,8 +26,8 @@ describe('API', () => {
                 .expect(200)
                 .expect(async ({ body }) => {
 
-                    const objTrim = body.map(async (product) =>{
-                       await _.omit(product, ['id','createdAt', 'updatedAt']);
+                    const objTrim = body.map(async (product) => {
+                        await _.omit(product, ['id', 'createdAt', 'updatedAt']);
                     });
                     assert.deepEqual(await objTrim, products);
                 });
@@ -99,7 +99,7 @@ describe('API', () => {
 
     describe('find a product by name', async () => {
 
-        it('doesn\'t work if user is not found', async () => {
+        it('doesn\'t work if product is not found', async () => {
             await supertest(app)
                 .delete('/products/name/my product not exist')
                 .expect(404);
@@ -111,10 +111,57 @@ describe('API', () => {
                 .get('/products/name/my product test')
                 .expect(200)
                 .expect(async ({ body }) => {
-                    assert.deepEqual(_.omit(body, ['id','createdAt', 'updatedAt']), productDoc);
+                    assert.deepEqual(_.omit(body, ['id', 'createdAt', 'updatedAt']), productDoc);
                 });
         })
-    })
+    });
+
+    describe('update', async () => {
+        let data = {
+            "name": "my product test",
+            "category": "my category test",
+            "sku": "A9999",
+            "price": 200,
+            "quantity": 15
+        }
+        let element;
+        let id;
+
+        beforeEach(async () => {
+            element = await db.findProducts({ 'name': 'my product test' });
+            id = element[0].id;
+        });
+
+        it('doesn\'t work if product is not found', async () => {
+            await supertest(app)
+                .put('/products/id/606e19f3bbb0134d20dda99b')
+                .expect(409);
+        });
+
+        it('works', async () => {
+            await supertest(app)
+                .put(`/products/id/${id}`)
+                .send({
+                    name: 'my product test updated',
+                    category: "my category test",
+                    sku: "A9999",
+                    price: 200,
+                    quantity: 15
+                })
+                .expect(200)
+                .expect(({ body }) => {
+                    assert.deepEqual(
+                        _.omit(body, ['id', 'createdAt', 'updatedAt']),
+                        {...data, name: 'my product test updated'}
+                    );
+                });
+
+            const newDoc = await db.findProductById(id);
+
+            assert(newDoc.name === 'my product test updated');
+        });
+
+    });
 
     describe('delete', async () => {
         let element;
@@ -125,7 +172,7 @@ describe('API', () => {
             id = element[0].id;
         });
 
-        it('doesn\'t work if user is not found', async () => {
+        it('doesn\'t work if product is not found', async () => {
             await supertest(app)
                 .delete('/products/id/606e19f3bbb0134d20dda99b')
                 .expect(404);

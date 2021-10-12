@@ -50,7 +50,7 @@ exports.createProduct = async (req, res, next) => {
             if (exist && exist.length > 0) {
                 res.status(409).send({
                     status: "failure",
-                    message: "User already exists"
+                    message: "product already exists"
                 });
             } else {
 
@@ -64,7 +64,7 @@ exports.createProduct = async (req, res, next) => {
                 } else {
 
                     res.status(500).send({
-                        message: "Something is wrong when creating the user"
+                        message: "Something is wrong when creating the product"
                     });
 
                 }
@@ -115,7 +115,7 @@ exports.getProductByName = async (req, res, next) => {
     try {
         const name = req.params.name;
 
-        const product = await db.findProducts({name: name});
+        const product = await db.findProducts({ name: name });
 
         if (product) {
 
@@ -131,6 +131,46 @@ exports.getProductByName = async (req, res, next) => {
         console.log(err)
     }
 
+}
+
+// update product by id
+exports.updateProductById = async (req, res, next) => {
+    try {
+        let body = req.body
+
+
+        const id = req.params.id;
+
+        const validBody = schemaProduct.validate(body)
+        
+        if (validBody.error) {
+
+            res.status(409).send({
+                status: "failure",
+                message: "bad request"
+            });
+
+        } else {
+
+            const product = await db.findProductById(id);
+            
+            if (product) {
+                const updated = await db.updateProductById(id, validBody.value);
+                const objUpdated = await db.findProductById(id);
+
+                res.status(200).send(objUpdated);
+
+            } else {
+                res.status(404).send({
+                    message: "product not found"
+                });
+            }
+        }
+
+        next()
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 //delete a product by id

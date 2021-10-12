@@ -39,6 +39,11 @@ db.findProductById = async (id) => {
     return await db.product.findById(id);
 };
 
+// function update product by id
+db.updateProductById = async (id, obj) => {
+    return await db.product.findByIdAndUpdate(id, obj, { useFindAndModify: false })
+}
+
 // function remove product by id
 db.removeProductById = async (id) => {
     return await db.product.findByIdAndRemove(id, { useFindAndModify: false });
