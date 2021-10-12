@@ -4,6 +4,6 @@
         "port": 4000
     },
     "db": {
-        "url": ""
+        "url": "mongodb+srv://dbmehdiuser:dbmehdiuser1920!@dev-mehdi-kata.nddug.mongodb.net/myTestDatabase?retryWrites=true&w=majority"
     }
 }
