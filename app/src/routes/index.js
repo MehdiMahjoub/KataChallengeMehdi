@@ -8,7 +8,10 @@ const product = require("../controllers/product_controllers");
 
 
 // Gestion des routes & REST methode
-router.get('/products/', product.findAllProducts); // find all products 
+router.get('/products/', product.findProducts); // find all products 
 
+router.post('/products/', product.createProduct); // create user
+
+router.get('/products/categorys/', product.getAllCategorys); // get all category
 
 module.exports = router;
