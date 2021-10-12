@@ -39,10 +39,15 @@ db.findProductById = async (id) => {
     return await db.product.findById(id);
 };
 
+// function remove product by id
+db.removeProductById = async (id) => {
+    return await db.product.findByIdAndRemove(id, { useFindAndModify: false });
+};
+
 // function delete all (use it in test)
 db.deleteAll = async () => {
     return await db.product.deleteMany();
-}
+};
 
 // function init db with some data
 db._initDb = async () => {
@@ -76,6 +81,6 @@ db._initDb = async () => {
     
     return data;
 
-}
+};
 
 module.exports = db;

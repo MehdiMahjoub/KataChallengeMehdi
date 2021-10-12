@@ -109,3 +109,28 @@ exports.getAllCategorys = async (req, res, next) => {
         console.log(error);
     }
 }
+
+//delete a product by id
+exports.removeProductById = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        const product = await db.findProductById(id);
+        if (product) {
+            const deleted = await db.removeProductById(id);
+            if (deleted) {
+                res.status(204).send({
+                    message: "Product was deleted successfully!"
+                });
+            }
+        } else {
+            res.status(404).send({
+                message: "Product not found"
+            });
+        }
+        next()
+    } catch (err) {
+        console.log(err)
+    }
+
+
+};

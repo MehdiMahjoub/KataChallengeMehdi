@@ -14,4 +14,6 @@ router.post('/products/', product.createProduct); // create user
 
 router.get('/products/categorys/', product.getAllCategorys); // get all category
 
+router.delete('/products/id/:id', product.removeProductById); // delete a product by id
+
 module.exports = router;
