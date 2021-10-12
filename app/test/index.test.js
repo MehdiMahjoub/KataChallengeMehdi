@@ -34,7 +34,7 @@ describe('API', () => {
         })
     });
 
-    describe('create product', () => {
+    describe('create product', async () => {
         it('doesn\'t work for with wrong data', async () => {
             await supertest(app)
                 .post('/products')
@@ -96,6 +96,15 @@ describe('API', () => {
                 });
         })
     });
+
+    describe('find a product by name', async () => {
+        it('works', async () => {
+            // get product  by name from db 
+            await supertest(app)
+                .get('/products/name/my product test')
+                .expect(200)
+        })
+    })
 
     describe('delete', async () => {
         let element;
