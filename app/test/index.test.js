@@ -7,13 +7,26 @@ const app = require('../src/index');
 const db = require('../src/models');
 
 describe('API', async () => {
+    // let token = '';
+
     before(async () => {
         await db.deleteAllProducts();
     });
+    // beforeEach( (done) => { //MAnque de temps 
+    //     supertest(app)
+    //         .get('/getToken/bobby@foo.com')
+    //         .end(function (err, res) {
+    //             token = res.text;
+    //             done();
+    //          });
+    // });
+ 
+
 
     //TODO before
     describe('get list', async () => {
         let products;
+        
 
         beforeEach(async () => {
             products = await db._initDb();
@@ -152,7 +165,7 @@ describe('API', async () => {
                 .expect(({ body }) => {
                     assert.deepEqual(
                         _.omit(body, ['id', 'createdAt', 'updatedAt']),
-                        {...data, name: 'my product test updated'}
+                        { ...data, name: 'my product test updated' }
                     );
                 });
 
