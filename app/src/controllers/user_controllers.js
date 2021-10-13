@@ -48,9 +48,9 @@ exports.deleteAllDb = async (req, res, next) => {
 
         console.log(resultDeleteUsers);
         console.log(resultDeleteProducts);
-        
+
         if ((resultDeleteUsers.deletedCount != 0) && (resultDeleteProducts.deletedCount != 0)) {
-            
+
             logger.info('data is deleted', { tags: 'deletedData' });
             res.status(204);
         } else {

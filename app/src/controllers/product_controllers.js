@@ -38,14 +38,14 @@ exports.findProducts = async (req, res, next) => {
 
 // create new products if not exist
 exports.createProduct = async (req, res, next) => {
-    
+
     try {
 
         let body = req.body;
         const validBody = schemaProduct.validate(body);
 
         if (validBody.error) {
-            
+
             logger.error("bad request body not conform", { tags: 'CreateProduct' });
             res.status(409).send({
                 status: "failure",
@@ -130,7 +130,7 @@ exports.getAllCategorys = async (req, res, next) => {
 
 //get product by name
 exports.getProductByName = async (req, res, next) => {
-    
+
     try {
 
         const name = req.params.name;
@@ -138,7 +138,7 @@ exports.getProductByName = async (req, res, next) => {
         const product = await db.findProducts({ name: name });
 
         if (product) {
-            
+
             logger.info("product is found", { tags: 'GetProductByName' });
             res.send(product)
 
@@ -159,14 +159,14 @@ exports.getProductByName = async (req, res, next) => {
 
 // update product by id
 exports.updateProductById = async (req, res, next) => {
-    
+
     try {
 
         const body = req.body;
         const id = req.params.id;
 
         const validBody = schemaProduct.validate(body);
-        
+
         if (validBody.error) {
 
             logger.error("bad request body not conform", { tags: 'UpdateProductById' });
@@ -178,11 +178,11 @@ exports.updateProductById = async (req, res, next) => {
         } else {
 
             const product = await db.findProductById(id);
-            
+
             if (product) {
                 const updated = await db.updateProductById(id, validBody.value);
                 const objUpdated = await db.findProductById(id);
-                
+
                 logger.info("product is updated", { tags: 'UpdateProductById' });
                 res.status(200).send(objUpdated);
 
@@ -203,7 +203,7 @@ exports.updateProductById = async (req, res, next) => {
 
 //delete a product by id
 exports.removeProductById = async (req, res, next) => {
-    
+
     try {
         const id = req.params.id;
         const product = await db.findProductById(id);
@@ -223,7 +223,7 @@ exports.removeProductById = async (req, res, next) => {
             });
         }
         next()
-        
+
     } catch (err) {
         logger.error(err, { tags: 'RemoveProductById' });
     }

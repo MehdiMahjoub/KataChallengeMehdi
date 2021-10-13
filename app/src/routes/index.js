@@ -24,5 +24,5 @@ router.delete('/products/id/:id', product.removeProductById); // delete a produc
 
 router.post('/seedImport/', user.seedImport) //seedImport data //TODO security
 router.delete('/seedImport/', user.deleteAllDb) //delete All Db //TODO security
- 
+
 module.exports = router;

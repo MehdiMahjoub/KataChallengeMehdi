@@ -4,14 +4,14 @@
 
 module.exports = mongoose => {
     let schema = mongoose.Schema(
-         {
+        {
             name: String,
             category: String,
             sku: String,
             price: Number,
             quantity: Number,
-         },
-         { timestamps: true }
+        },
+        { timestamps: true }
     );
 
     schema.method("toJSON", function () {

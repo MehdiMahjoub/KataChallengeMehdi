@@ -4,11 +4,11 @@
 
 module.exports = mongoose => {
     let schema = mongoose.Schema(
-         {
+        {
             name: String,
             email: String,
-         },
-         { timestamps: true }
+        },
+        { timestamps: true }
     );
 
     schema.method("toJSON", function () {
