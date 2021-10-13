@@ -3,6 +3,10 @@
     "server": {
         "port": 4000
     },
+    "logger": {
+        "env": "test",
+        "application": "cataloge"
+    },
     "db": {
         "url": "mongodb+srv://dbmehdiuser:dbmehdiuser1920!@dev-mehdi-kata.nddug.mongodb.net/myTestDatabase?retryWrites=true&w=majority"
     }
