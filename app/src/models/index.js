@@ -10,18 +10,60 @@ const db = {};
 db.mongoose = mongoose;
 db.url = config.get("db:url");
 db.product = require("./product.model.js")(mongoose);
+db.user = require("./user.model.js")(mongoose);
+
+
+// //function to add a user
+// db.addUser = async (user) => {
+//     await user.save(function (err) {
+//         if (err) return handleError(err);
+//     })
+//     return user;
+// }
+
+//function add arary of users
+db.addUsers = async (users) => {
+    try {
+        await db.user.create(users);
+        console.log('data is imported');
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+//function add arary of products
+db.addProducts = async (products) => {
+    try {
+        await db.product.create(products);
+        console.log('data is imported');
+    } catch (error) {
+        console.error(error);
+    }
+
+}
+
+// function delete all users (use it in test)
+db.deleteAllUsers = async () => {
+    return await db.user.deleteMany();
+};
+//find a user by email
+db.findUser = async (params) => {
+    if (!params) {
+        return await db.user.find()
+    }
+    return await db.user.find(params)
+};
 
 // function to save a new product
-db.create = async (product) => {
+db.createProduct = async (product) => {
     await product.save(function (err) {
         if (err) return handleError(err);
     })
     return product;
 }
 
-
 //find all or one product by params
-db.findProducts  = async (params) => {
+db.findProducts = async (params) => {
     if (!params) {
         return await db.product.find()
     }
@@ -49,8 +91,8 @@ db.removeProductById = async (id) => {
     return await db.product.findByIdAndRemove(id, { useFindAndModify: false });
 };
 
-// function delete all (use it in test)
-db.deleteAll = async () => {
+// function delete all products (use it in test)
+db.deleteAllProducts = async () => {
     return await db.product.deleteMany();
 };
 
@@ -83,7 +125,7 @@ db._initDb = async () => {
     if (!(dataDb && dataDb.length > 0)) {
         await db.product.create(data);
     }
-    
+
     return data;
 
 };

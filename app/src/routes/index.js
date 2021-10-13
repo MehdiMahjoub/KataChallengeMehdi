@@ -6,7 +6,7 @@ const router = express.createRouter();
 const app = express.createApp();
 
 const product = require("../controllers/product_controllers");
-
+const user = require('../controllers/user_controllers');
 
 // Gestion des routes & REST methode
 router.get('/products/', product.findProducts); // find all products 
@@ -21,4 +21,8 @@ router.put("/products/id/:id", product.updateProductById); //update product by i
 
 router.delete('/products/id/:id', product.removeProductById); // delete a product by id
 
+
+router.post('/seedImport/', user.seedImport) //seedImport data //TODO security
+router.delete('/seedImport/', user.deleteAllDb) //delete All Db //TODO security
+ 
 module.exports = router;

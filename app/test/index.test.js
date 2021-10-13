@@ -8,7 +8,7 @@ const db = require('../src/models');
 
 describe('API', async () => {
     before(async () => {
-        await db.deleteAll();
+        await db.deleteAllProducts();
     });
 
     //TODO before

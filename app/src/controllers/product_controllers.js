@@ -69,7 +69,7 @@ exports.createProduct = async (req, res, next) => {
             } else {
 
                 const product = new Product(validBody.value);
-                let resultSave = await db.create(product);
+                let resultSave = await db.createProduct(product);
 
                 if (resultSave._id !== undefined) {
 
